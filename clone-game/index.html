@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width">
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <title>Platformer</title>
+</head>
+
+<body>
+    <div id="menu">
+        <p>menu</p>
+        <div id="menu-list">
+        </div>
+    </div>
+
+    <canvas></canvas>
+
+    <script type="text/javascript">
+        let part = String(window.location).split("?")[1];
+        let parts = {
+            "main":["main/controller.js", "main/display.js", "main/engine.js", "main/game.js", "main/main.js"],
+        };
+
+        switch(part) {
+            default:
+                part = "main";
+        }
+
+        for (let index = 0; index < parts[part].length; index++) {
+            let script = document.createElement("script");
+            script.setAttribute("type", "text/javascript");
+            script.setAttribute("src", parts[part][index]);
+            document.head.appendChild(script);
+        }
+
+        let menu = document.getElementById("menu");
+        let menu_list = document.getElementById("menu-list");
+
+        menu.addEventListener("click", function(event) {
+            menu_list.style.display = (menu_list.style.display == "none") ? "grid" : "none";
+        });
+
+        menu_list.style.display = "none";
+    </script>
+</body>
+</html>
